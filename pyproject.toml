@@ -8,5 +8,6 @@ dependencies = [
     "pygame>=2.5.0",
     "TikTokLive",
     "PyQt6",
-    "qasync"
+    "qasync",
+    "edge-tts>=7.2.3",
 ]

@@ -405,10 +405,6 @@ class MainWindow(DraggableMainWindow):
         """Speak text using TTS manager"""
         return self.tts_manager.speak(text, override)
     
-    def say(self, text: str, override: bool = False) -> bool:
-        """Say text using TTS manager (alias for speak)"""
-        return self.tts_manager.say(text, override)
-    
     def set_tts_voice(self, voice: str) -> bool:
         """Change TTS voice"""
         return self.tts_manager.set_voice(voice)

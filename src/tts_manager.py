@@ -175,19 +175,6 @@ class TextToSpeechManager:
         Convert text to speech and play it
         
         Args:
-            text: Text to convert to speech
-            override: If True, override current playback mode to use OVERRIDE
-            
-        Returns:
-            True if text was queued/played successfully, False otherwise
-        """
-        return self.say(text, override)
-    
-    def say(self, text: str, override: bool = False) -> bool:
-        """
-        Convert text to speech and play it
-        
-        Args:
             text: Text to convert to speech  
             override: If True, override current playback mode to use OVERRIDE
             
