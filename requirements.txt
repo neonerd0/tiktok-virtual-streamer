@@ -1,0 +1,5 @@
+edge-tts>=6.1.0
+pygame>=2.0.0
+PyQt6>=6.0.0
+TikTokLive>=5.0.0
+qasync>=0.23.0

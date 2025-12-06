@@ -1,0 +1,3 @@
+[submodule "lib/TikTokLive"]
+	path = lib/TikTokLive
+	url = https://github.com/isaackogan/TikTokLive.git
