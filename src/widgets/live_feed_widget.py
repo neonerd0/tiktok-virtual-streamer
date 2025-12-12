@@ -3,7 +3,8 @@ from PyQt6.QtCore import pyqtSignal, pyqtSlot
 from PyQt6.QtGui import QFont, QTextCharFormat, QColor
 from enum import Enum
 from dataclasses import dataclass
-from typing import Dict
+from typing import Dict, Optional
+from tts_manager import TextToSpeechManager
 
 
 class MessageType(Enum):
@@ -33,9 +34,10 @@ class LiveFeedWidget(QWidget):
     # Signal for opacity changes
     opacity_changed = pyqtSignal(float)
     
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, tts_manager: Optional[TextToSpeechManager] = None):
         super().__init__(parent)
         self._message_configs = self._get_default_configs()
+        self.tts_manager = tts_manager
         self.setup_ui()
     
     def _get_default_configs(self) -> Dict[MessageType, MessageConfig]:
@@ -78,7 +80,7 @@ class LiveFeedWidget(QWidget):
         # Remove margins for cleaner look
         layout.setContentsMargins(0, 0, 0, 0)
     
-    def add_message(self, message, message_type=MessageType.DEFAULT):
+    def add_message(self, message, message_type=MessageType.DEFAULT, say_outloud=False):
         """Add a message to the feed with specified type and formatting"""
         # Get current cursor
         cursor = self.text_feed.textCursor()
@@ -94,6 +96,10 @@ class LiveFeedWidget(QWidget):
         # Auto-scroll to bottom
         scrollbar = self.text_feed.verticalScrollBar()
         scrollbar.setValue(scrollbar.maximum())
+        
+        # Use TTS if requested and available
+        if say_outloud and self.tts_manager:
+            self.tts_manager.speak(message)
     
     def clear_feed(self):
         """Clear all messages from the feed"""

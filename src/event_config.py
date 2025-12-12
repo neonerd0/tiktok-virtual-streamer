@@ -27,7 +27,7 @@ class TikTokEventSettings:
     comments: EventConfig = field(default_factory=lambda: EventConfig(
         enabled=True,
         message_type=MessageType.DEFAULT,
-        message_template="💬 {nickname}: {comment}"
+        message_template="{nickname} says {comment}"
     ))
     
     # Gift events
@@ -40,7 +40,7 @@ class TikTokEventSettings:
     
     # User join events
     joins: EventConfig = field(default_factory=lambda: EventConfig(
-        enabled=True,
+        enabled=False,
         message_type=MessageType.DEFAULT,
         message_template="👋 {nickname} joined the stream!",
         chime_audio_file="audio/chime-sound-7143.mp3"

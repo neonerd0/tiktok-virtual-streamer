@@ -55,7 +55,7 @@ class MainWindow(DraggableMainWindow):
         
         # Initialize TTS manager
         self.tts_manager = TextToSpeechManager(
-            max_queue_size=10,
+            max_queue_size=3,
             playback_mode=TTSPlaybackMode.QUEUE
         )
         
@@ -71,8 +71,8 @@ class MainWindow(DraggableMainWindow):
         self.live_connect_widget = LiveConnectWidget("@", max_retries=5)
         self.__layout.addWidget(self.live_connect_widget)
         
-        # Add the LiveFeedWidget
-        self.live_feed_widget = LiveFeedWidget()
+        # Add the LiveFeedWidget with TTS manager
+        self.live_feed_widget = LiveFeedWidget(tts_manager=self.tts_manager)
         self.__layout.addWidget(self.live_feed_widget)
         
         # Create separate settings window (initially hidden)
@@ -276,7 +276,8 @@ class MainWindow(DraggableMainWindow):
                 nickname=event.user.nickname,
                 comment=event.comment
             )
-            self.live_feed_widget.add_message(message, config.message_type)
+            # Use TTS for chat messages
+            self.live_feed_widget.add_message(message, config.message_type, say_outloud=True)
             
             # Play audio if configured
             self.play_event_audio(config)
