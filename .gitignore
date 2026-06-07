@@ -255,3 +255,6 @@ temp/
 *.njsproj
 *.sln
 *.sw?
+
+# Claude Memory System - session notes (user-specific)
+.claude/memory/sessions/
